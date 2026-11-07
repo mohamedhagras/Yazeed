@@ -38,6 +38,8 @@
     <details class="nav-group">
       <summary><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v6H4zM14 15h6v6h-6z"/></svg><span class="nav-label">الأقسام</span><span class="nav-group-chevron" aria-hidden="true">⌄</span></summary>
       <div class="nav-group-menu">
+    <a href="adhkar.html?period=morning"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg><span class="nav-label">أذكار الصباح</span></a>
+    <a href="adhkar.html?period=evening"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"/></svg><span class="nav-label">أذكار المساء</span></a>
     <a href="#daily-content"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8zM19 16l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/></svg><span class="nav-label">زادك اليومي</span></a>
     <a href="#prayer"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span class="nav-label">الصلاة</span></a>
     <a href="#notifications"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg><span class="nav-label">التنبيهات</span></a>
@@ -124,6 +126,35 @@
       <div class="cal-grid" id="currentCalendarGrid"></div>
     </div>
   </dialog>
+  <section class="home-adhkar-section" aria-labelledby="homeAdhkarTitle">
+    <div class="home-adhkar-heading">
+      <span class="home-adhkar-heading-mark" aria-hidden="true">✦</span>
+      <div>
+        <h2 id="homeAdhkarTitle">أذكار الصباح والمساء</h2>
+        <p>اختر وقتك، واقرأ أذكارك في صفحة مرتبة وسهلة.</p>
+      </div>
+    </div>
+    <div class="home-adhkar-cards">
+      <a class="home-adhkar-card morning" href="adhkar.html?period=morning">
+        <span class="home-adhkar-icon" aria-hidden="true">☀</span>
+        <span class="home-adhkar-copy">
+          <span class="home-adhkar-period">بداية يومك</span>
+          <strong>أذكار الصباح</strong>
+          <span class="home-adhkar-description">ابدأ يومك بذكر الله وطمأنينة القلب.</span>
+        </span>
+        <span class="home-adhkar-action">ابدأ الأذكار <span aria-hidden="true">←</span></span>
+      </a>
+      <a class="home-adhkar-card evening" href="adhkar.html?period=evening">
+        <span class="home-adhkar-icon" aria-hidden="true">☾</span>
+        <span class="home-adhkar-copy">
+          <span class="home-adhkar-period">ختام يومك</span>
+          <strong>أذكار المساء</strong>
+          <span class="home-adhkar-description">اختم يومك بالذكر والسكينة.</span>
+        </span>
+        <span class="home-adhkar-action">ابدأ الأذكار <span aria-hidden="true">←</span></span>
+      </a>
+    </div>
+  </section>
   <section class="personal-panels" aria-label="المحتوى اليومي">
     <section class="daily-content-section" id="daily-content" aria-label="المحتوى اليومي">
       <div class="daily-content-heading">
