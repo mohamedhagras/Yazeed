@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#263329">
+<title>مشغل الإذاعة | يَزِيد</title>
+<link rel="stylesheet" href="radio-player.css">
+</head>
+<body>
+<main class="floating-player" aria-label="مشغل الإذاعة العائم">
+  <div class="floating-player-heading">
+    <span class="floating-player-mark" aria-hidden="true">◉</span>
+    <div>
+      <span class="floating-player-kicker">يَزِيد · يُبث الآن</span>
+      <h1 id="stationName">إذاعة القرآن الكريم</h1>
+    </div>
+  </div>
+  <audio id="floatingAudio" preload="none"></audio>
+  <p id="playerStatus" class="player-status" role="status" aria-live="polite">جارٍ الاتصال بالبث…</p>
+  <div class="floating-player-controls">
+    <button id="playPause" class="play-button" type="button">تشغيل</button>
+    <label for="volume">الصوت
+      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.8">
+    </label>
+    <button id="closePlayer" class="close-button" type="button">إغلاق</button>
+  </div>
+</main>
+<script src="radio-player.js"></script>
+</body>
+</html>

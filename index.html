@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F3ECDF">
+<title>يَزِيد</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Readex+Pro:wght@300;400;600&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="motion-nav" aria-label="التنقل الرئيسي">
+  <div class="motion-nav-info">
+    <section class="weather-mini" id="weatherMini" aria-label="طقس اليوم">
+      <div class="weather-mini-head"><span class="weather-mini-title">🌤️ طقس اليوم</span><span class="weather-mini-status" id="weatherStatus">جارٍ تحميل الطقس…</span></div>
+      <div class="weather-mini-main"><span class="weather-mini-icon" id="weatherIcon">🌤️</span><div><div class="weather-mini-temp" id="weatherTemp">--°</div><div class="weather-mini-desc" id="weatherDesc">حالة الطقس</div></div></div>
+      <div class="weather-mini-details"><span id="weatherRange">العظمى --° / الصغرى --°</span><span id="weatherWind">الرياح -- كم/س</span></div>
+    </section>
+  </div>
+  <div class="motion-links" id="primaryNavLinks">
+    <button class="theme" id="theme" type="button" aria-label="تبديل الوضع الداكن أو الفاتح" title="تبديل الوضع"></button>
+    <button class="nav-menu-toggle" id="navMenuToggle" type="button" aria-label="فتح قائمة التنقل" aria-expanded="false" aria-controls="primaryNavLinks">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <a href="#home" class="active"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10.5h-6v-6h-5v6h-6z"/></svg><span class="nav-label">الرئيسية</span></a>
+    <div class="calendar-nav-dropdown">
+      <button class="calendar-nav-toggle" id="calendarMenuToggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="calendarMenu">
+        <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M7.5 3v4M16.5 3v4M3.5 9.5h17M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/></svg><span class="nav-label">التقويم</span><span class="calendar-nav-chevron" aria-hidden="true">⌄</span>
+      </button>
+      <div class="calendar-nav-menu" id="calendarMenu" hidden>
+        <button type="button" id="currentCalendarOption">تقويم الشهر الحالي</button>
+        <button type="button" id="ramadanCalendarOption">تقويم رمضان ١٤٤٨ هـ</button>
+      </div>
+    </div>
+    <details class="nav-group">
+      <summary><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v6H4zM14 15h6v6h-6z"/></svg><span class="nav-label">الأقسام</span><span class="nav-group-chevron" aria-hidden="true">⌄</span></summary>
+      <div class="nav-group-menu">
+    <a href="#daily-content"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8zM19 16l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/></svg><span class="nav-label">زادك اليومي</span></a>
+    <a href="#prayer"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span class="nav-label">الصلاة</span></a>
+    <a href="#notifications"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg><span class="nav-label">التنبيهات</span></a>
+    <a href="#quran"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 9 6l3 3 3-3zM6 9l-3 3 3 3 3-3zM18 9l-3 3 3 3 3-3zM12 15l-3 3 3 3 3-3z"/><path d="m9 6-3 3m9-3 3 3M9 15l3 3m3-3-3 3"/></svg><span class="nav-label">ورد القرآن</span></a>
+      </div>
+    </details>
+    <details class="nav-group">
+      <summary><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5"/></svg><span class="nav-label">المكتبة</span><span class="nav-group-chevron" aria-hidden="true">⌄</span></summary>
+      <div class="nav-group-menu">
+    <a href="reels.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="m10 8 6 4-6 4zM3 8h18M8 3l3 5M15 3l3 5"/></svg><span class="nav-label">ريل</span></a>
+    <a href="posts.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M7 8h10M7 12h10M7 16h6"/></svg><span class="nav-label">المنشورات</span></a>
+    <a href="hadith.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 5.5v15M8 7h8M8 11h8"/></svg><span class="nav-label">الأحاديث</span></a>
+    <a href="quran.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C9.5 4.7 6.2 4.5 3.5 5.5v14c3-1.2 6-.8 8.5 1 2.5-1.8 5.5-2.2 8.5-1v-14c-2.7-1-6-.8-8.5 1zM12 6.5v14"/></svg><span class="nav-label">المصحف</span></a>
+      </div>
+    </details>
+    <a class="radio-nav-toggle" href="radio.html" aria-label="الإذاعة العامة">
+      <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zM17 9a4 4 0 0 1 0 6M19.5 6.5a8 8 0 0 1 0 11"/></svg><span class="nav-label">الإذاعة</span>
+    </a>
+  </div>
+</nav>
+
+<main id="home">
+  <div class="hero-countdown-layout">
+  <header class="hero">
+    <div class="hero-brand">
+      <svg class="moon" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M62 14a38 38 0 1 0 24 62A32 32 0 0 1 62 14z" fill="var(--accent)"/>
+        <path class="st" d="M78 22l2.4 5.6 5.6 2.4-5.6 2.4L78 38l-2.4-5.6L70 30l5.6-2.4z" fill="var(--accent)"/>
+        <circle class="st st2" cx="94" cy="56" r="1.8" fill="var(--accent)"/>
+        <circle class="st" cx="92" cy="8" r="1.4" fill="var(--accent)"/>
+      </svg>
+      <div class="hero-copy">
+        <h1 id="title">باقي على رمضان</h1>
+        <p class="sub" id="sub"></p>
+        <p class="today" id="today"></p>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="المناسبات"></nav>
+  </header>
+  <section class="countdown-panel" aria-label="العد التنازلي">
+    <div class="countdown-heading-row">
+      <h2 class="countdown-heading">العد التنازلي بالشهور والأيام</h2>
+      <button class="share countdown-share-icon" id="share" type="button" aria-label="إنشاء صورة العدّ التنازلي" aria-haspopup="dialog" aria-expanded="false" title="إنشاء صورة العدّ التنازلي">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M16.5 4.5a7.5 7.5 0 1 0 3 14.4A8.3 8.3 0 0 1 16.5 4.5Z"/><path d="m17.5 7 .55 1.15 1.25.18-.9.88.21 1.24-1.11-.59-1.11.59.21-1.24-.9-.88 1.25-.18L17.5 7Z"/></svg>
+      </button>
+    </div>
+    <section class="pair" id="pair" aria-label="العد التنازلي بالشهور والأيام">
+      <div class="col">
+        <h2>ميلادي</h2>
+        <div class="nums">
+          <div><span class="n" id="gm">٠</span><span class="l">شهر</span></div>
+          <div><span class="n" id="gd">٠</span><span class="l">يوم</span></div>
+        </div>
+        <p class="dt" id="gdate"></p>
+      </div>
+      <div class="col">
+        <h2>هجري</h2>
+        <div class="nums">
+          <div><span class="n" id="hm">٠</span><span class="l">شهر</span></div>
+          <div><span class="n" id="hd">٠</span><span class="l">يوم</span></div>
+        </div>
+        <p class="dt" id="hdate"></p>
+      </div>
+    </section>
+    <div class="ramadan-days-counter" aria-live="polite">
+      <span>الأيام المتبقية لرمضان</span>
+      <strong id="ramadanDaysRemaining">--</strong>
+      <span>يومًا</span>
+    </div>
+    <p class="rmday" id="rmday"></p>
+    <p class="done" id="done"></p>
+    <div class="nights" id="nights"></div>
+  </section>
+  </div>
+  <dialog class="calendar-dialog" id="calendar" aria-labelledby="calendarTitle">
+    <div class="calendar">
+      <div class="cal-head"><strong id="calendarTitle">تقويم رمضان</strong><button class="tool-btn" id="calendarClose" type="button">إغلاق</button></div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+  </dialog>
+  <dialog class="calendar-dialog current-calendar-dialog" id="current-calendar" aria-labelledby="currentCalendarTitle">
+    <div class="calendar">
+      <div class="cal-head"><strong id="currentCalendarTitle">تقويم الشهر الحالي</strong><button class="tool-btn" id="currentCalendarClose" type="button">إغلاق</button></div>
+      <div class="cal-grid" id="currentCalendarGrid"></div>
+    </div>
+  </dialog>
+  <section class="personal-panels" aria-label="المحتوى اليومي">
+    <section class="daily-content-section" id="daily-content" aria-label="المحتوى اليومي">
+      <div class="daily-content-heading">
+        <span class="daily-content-mark" aria-hidden="true">✦</span>
+        <div><h2>زادك اليومي</h2></div>
+      </div>
+      <div class="section-capture-actions">
+        <button class="copy-btn capture-btn" id="captureDaily" type="button" data-screenshot-ignore aria-haspopup="dialog" aria-expanded="false">📸 تنزيل زادك اليومي كصورة</button>
+      </div>
+      <div class="content-cards">
+        <section class="verse" id="daily-verse" aria-label="آية اليوم">
+          <div class="vh">آية اليوم من القرآن الكريم</div>
+          <button class="card-capture-button" type="button" data-capture-card="daily-verse" data-screenshot-ignore aria-label="إنشاء صورة آية اليوم" title="إنشاء صورة آية اليوم" aria-haspopup="dialog" aria-controls="captureStylePopover" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></button>
+          <p id="vt"></p>
+          <div class="vrow"><small id="vr"></small><button class="copy-btn" data-copy="vt" type="button">نسخ الآية</button><button class="vbtn" id="vnext" aria-label="آية أخرى" title="آية أخرى"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></button></div>
+        </section>
+        <section class="verse" id="adhkar" aria-label="أذكار">
+          <div class="vh">أذكار</div>
+          <button class="card-capture-button" type="button" data-capture-card="adhkar" data-screenshot-ignore aria-label="إنشاء صورة الذكر اليومي" title="إنشاء صورة الذكر اليومي" aria-haspopup="dialog" aria-controls="captureStylePopover" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></button>
+          <p id="zt"></p>
+          <div class="vrow"><small id="zr"></small><button class="copy-btn" data-copy="zt" type="button">نسخ الذكر</button><button class="vbtn" id="znext" aria-label="ذكر آخر"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></button></div>
+        </section>
+        <section class="verse" id="duas" aria-label="أدعية">
+          <div class="vh">أدعية</div>
+          <button class="card-capture-button" type="button" data-capture-card="duas" data-screenshot-ignore aria-label="إنشاء صورة دعاء اليوم" title="إنشاء صورة دعاء اليوم" aria-haspopup="dialog" aria-controls="captureStylePopover" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></button>
+          <p id="dt"></p>
+          <div class="vrow"><small id="dr"></small><button class="copy-btn" data-copy="dt" type="button">نسخ الدعاء</button><button class="vbtn" id="dnext" aria-label="دعاء آخر"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></button></div>
+        </section>
+        <section class="verse quote-card" id="quotes" aria-label="اقتباس من أقوال علماء المسلمين">
+          <div class="vh">اقتباس من العلماء</div>
+          <button class="card-capture-button" type="button" data-capture-card="quotes" data-screenshot-ignore aria-label="إنشاء صورة اقتباس اليوم" title="إنشاء صورة اقتباس اليوم" aria-haspopup="dialog" aria-controls="captureStylePopover" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></button>
+          <p id="qt"></p>
+          <div class="vrow"><small id="qr"></small><button class="copy-btn" data-copy="qt" type="button">نسخ المقولة</button><button class="vbtn" id="qnext" aria-label="مقولة أخرى" title="مقولة أخرى"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></button></div>
+        </section>
+      </div>
+    </section>
+  </section>
+
+  <!-- Prayer times and daily notifications sit side by side; Quran spans the full width below. -->
+      <section class="prayer-daily-layout" aria-label="مواقيت الصلاة والتنبيهات اليومية">
+<section class="prayer-card" id="prayer">
+        <div class="global-location-picker" aria-label="موقعك ومواقيت الصلاة">
+          <div class="location-summary">
+            <div class="location-summary-copy">
+              <strong id="selectedLocationLabel">الموقع الافتراضي: القاهرة، مصر</strong>
+              <span id="citySearchStatus" class="location-status" role="status" aria-live="polite">جارٍ محاولة تحديد موقعك تلقائيًا…</span>
+            </div>
+            <button id="detectLocation" class="detect-location-btn" type="button">تحديد موقعي</button>
+          </div>
+          <details class="manual-location" id="manualLocation">
+            <summary>اختيار المدينة يدويًا</summary>
+            <div class="manual-location-fields">
+              <div class="location-field"><label for="citySearch">المدينة / المحافظة</label><div class="city-search-row"><input id="citySearch" type="search" placeholder="اكتب اسم المدينة…" value="القاهرة" autocomplete="off"><button id="searchCityBtn" type="button">بحث</button></div></div>
+              <div id="cityResults" class="city-results" role="listbox" aria-label="نتائج المدن"></div>
+            </div>
+          </details>
+        </div>
+        <select id="citySelect" class="city-select" aria-label="المدينة" hidden><option value="cairo">القاهرة</option></select>
+        <p class="ift next-prayer-banner" id="ift" aria-live="polite"></p>
+        <section class="pray" aria-label="مواقيت الصلاة">
+    <p class="nextp" id="nextp" hidden></p>
+    <div class="pg" id="pg"></div>
+  </section>
+  <section class="prayer-checklist" aria-label="تسجيل الصلوات التي أديتها">
+    <div class="prayer-checklist-head"><strong>✅ صلواتي اليوم</strong><span id="prayerCheckCount">٠ من ٥</span></div>
+    <div class="prayer-checks">
+      <label><input type="checkbox" data-prayer-check="fajr"> الفجر</label>
+      <label><input type="checkbox" data-prayer-check="dhuhr"> الظهر</label>
+      <label><input type="checkbox" data-prayer-check="asr"> العصر</label>
+      <label><input type="checkbox" data-prayer-check="maghrib"> المغرب</label>
+      <label><input type="checkbox" data-prayer-check="isha"> العشاء</label>
+    </div>
+  </section>
+      </section>
+      <section class="automation-panel" id="notifications" aria-label="إعدادات التنبيهات اليومية">
+        <div class="panel-head"><strong>🔔 تنبيهاتك اليومية</strong><button class="tool-btn notification-enable-button" id="notifyToggle" type="button" aria-pressed="false">تفعيل التنبيهات</button></div>
+        <p class="notify-status" id="notifyStatus" role="status" aria-live="polite"></p>
+        <div class="notify-options">
+          <label class="notify-option"><input type="checkbox" id="prefPrayer" checked> الصلاة القادمة — قبلها بـ ٥ دقائق</label>
+          <label class="notify-option"><input type="checkbox" id="prefIftar" checked> الإفطار — قبل المغرب بـ ١٠ دقائق في رمضان</label>
+          <label class="notify-option"><input type="checkbox" id="prefAdhkar" checked> أذكار الصباح والمساء</label>
+          <label class="notify-option"><input type="checkbox" id="prefVerse"> تذكير بآية اليوم</label>
+          <label class="notify-option notify-sound-option"><input type="checkbox" id="prefSound"> تشغيل نغمة قصيرة مع التنبيه</label>
+        </div>
+      </section>
+      <section class="verse quran-daily-card" id="quran" aria-label="ورد القرآن اليومي">
+        <div class="vh">📖 ورد القرآن اليومي</div>
+        <div class="quran-meta"><span id="quranPageLabel">صفحة ١ من ٦٠٤</span><span id="quranDateLabel"></span></div>
+        <div class="quran-page" id="quranPageText" lang="ar" dir="rtl" aria-live="polite">جارٍ تحميل صفحة القرآن الكريم…</div>
+        <p class="quran-note" id="quranStatus" aria-live="polite"></p>
+        <div class="quran-actions"><button class="copy-btn" id="copyQuran" type="button">نسخ صفحة اليوم</button><button class="copy-btn capture-btn" id="captureQuran" type="button" data-screenshot-ignore aria-haspopup="dialog" aria-expanded="false">📸 تصوير ومشاركة الورد</button><button class="quran-complete" id="quranComplete" type="button" data-screenshot-ignore>أنهيت ورد اليوم ✓</button></div>
+        <a class="quran-source" id="quranSource" href="https://quran.com/" target="_blank" rel="noopener">فتح الصفحة على Quran.com</a>
+      </section>
+      </section>
+
+  <footer class="site-footer">
+    <span class="footer-brand-mark" aria-hidden="true">ي</span>
+    <strong class="footer-brand">يَزِيد</strong>
+    <span class="footer-credit">تصميم وتطوير مُحَمَّد هَجْرَس</span>
+    <span class="footer-copyright">© <span id="copyrightYear">٢٠٢٦</span> جميع الحقوق محفوظة</span>
+    <div class="footer-socials" aria-label="حسابات التواصل الاجتماعي">
+      <span class="footer-social-icon" role="img" aria-label="فيسبوك"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8z"/></svg></span>
+      <span class="footer-social-icon" role="img" aria-label="إنستجرام"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="social-dot" cx="17.7" cy="6.8" r="1"/></svg></span>
+      <span class="footer-social-icon footer-x-icon" role="img" aria-label="تويتر أو X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4.2l9.8 16h-4.2zM19 4 5 20"/></svg></span>
+      <span class="footer-social-icon footer-threads-icon" role="img" aria-label="ثريدز">@</span>
+      <span class="footer-social-icon footer-linkedin-icon" role="img" aria-label="لينكدإن">in</span>
+      <a class="footer-social-icon" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.1c-3.4.7-4.1-1.5-4.1-1.5-.6-1.5-1.4-1.9-1.4-1.9-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6.9.1-.8.4-1.3.8-1.6-2.7-.3-5.6-1.4-5.6-6.1 0-1.3.5-2.5 1.2-3.3-.1-.3-.5-1.7.1-3.4 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 3.1.1 3.4.8.8 1.2 2 1.2 3.3 0 4.8-2.9 5.8-5.7 6.1.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .8Z"/></svg></a>
+    </div>
+  </footer>
+</main>
+
+<div class="page-navigation-actions" aria-label="التنقل السريع">
+  <button class="page-scroll-button" id="scrollToBottom" type="button" aria-label="انتقل إلى أسفل الصفحة" title="انتقل إلى أسفل الصفحة">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg>
+  </button>
+  <button class="page-scroll-button" id="scrollToTop" type="button" aria-label="العودة إلى أعلى الصفحة" title="العودة إلى أعلى الصفحة" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5M6 11l6-6 6 6"/></svg>
+  </button>
+</div>
+
+<div class="ov" id="ov" role="dialog" aria-label="صورة للمشاركة">
+  <img id="img" alt="صورة العد التنازلي">
+  <div class="row"><button id="send">مشاركة</button><button id="downloadImage">تنزيل الصورة</button><button id="close">إغلاق</button></div>
+</div>
+
+<select id="shareStyle" class="share-style-select" aria-label="اختيار شكل صورة المشاركة" hidden>
+  <option value="classic">كلاسيكي</option><option value="night">ليلي ذهبي</option><option value="light">فاتح</option>
+</select>
+<select id="shareSize" aria-label="اختيار مقاس صورة المشاركة" hidden>
+  <option value="vertical">رأسي</option><option value="square">مربع</option>
+</select>
+<div class="capture-style-popover" id="captureStylePopover" role="dialog" aria-label="اختيار شكل الصورة" hidden>
+  <strong>مقاس الصورة</strong>
+  <div class="capture-style-options capture-size-options">
+    <button type="button" data-size="vertical">رأسي · للقصص</button>
+    <button type="button" data-size="square">مربع · للمنشورات</button>
+  </div>
+  <strong>نمط الصورة</strong>
+  <div class="capture-style-options">
+    <button type="button" data-style="classic">كلاسيكي</button>
+    <button type="button" data-style="night">ليلي ذهبي</button>
+    <button type="button" data-style="light">فاتح</button>
+  </div>
+  <button type="button" class="capture-style-create" id="captureCreateButton">إنشاء الصورة</button>
+  <button type="button" class="capture-style-cancel" id="captureStyleCancel">إلغاء</button>
+</div>
+<div class="floating-toast" id="floatingToast" role="status" aria-live="polite"><strong></strong><p></p></div>
+<script src="script.js"></script>
+<script src="scroll-navigation.js"></script>
+</body>
+</html>

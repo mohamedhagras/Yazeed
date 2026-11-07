@@ -1,0 +1,71 @@
+.radio-page .content-page-main{max-width:1180px}
+.radio-feature-card{min-height:200px;margin:0 0 24px;padding:4px clamp(12px,2vw,20px);overflow:hidden;border:1px solid color-mix(in srgb,var(--accent) 32%,var(--line));border-radius:28px;background:linear-gradient(140deg,color-mix(in srgb,var(--bg2) 94%,var(--accent)),var(--bg2));box-shadow:0 16px 42px rgba(20,30,20,.08)}
+.radio-heading{text-align:center;margin:0;padding:2px 8px 3px;border:0;border-radius:20px;background:transparent;box-shadow:none}
+.radio-heading::after{inset:auto -40px -150px auto}
+.radio-heading h1{margin:0 0 2px;font-size:clamp(24px,2.8vw,30px);line-height:1.1}
+.radio-waveform{display:flex;align-items:center;justify-content:center;gap:4px;height:12px}
+.radio-waveform i{display:block;width:4px;height:7px;border-radius:99px;background:var(--accent);opacity:.7}
+.radio-waveform i:nth-child(3n){height:19px}
+.radio-waveform i:nth-child(4n){height:27px}
+.radio-waveform i:nth-child(5n){height:13px}
+.radio-player-panel{margin:0;padding:4px 10px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none}
+.radio-official-player{margin:0 0 24px;padding:clamp(18px,3vw,30px);border:1px solid color-mix(in srgb,var(--accent) 32%,var(--line));border-radius:24px;background:linear-gradient(140deg,color-mix(in srgb,var(--bg2) 94%,var(--accent)),var(--bg2));box-shadow:0 16px 42px rgba(20,30,20,.08)}
+.radio-player-top{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.radio-player-label{color:var(--muted);font-size:12px}
+.radio-player-top h2{margin:1px 0 0;font-family:"Reem Kufi","Readex Pro",sans-serif;font-size:clamp(16px,2vw,20px);line-height:1.2}
+.radio-live-indicator{display:inline-block;width:8px;height:8px;margin-inline-end:7px;border-radius:50%;background:#a5a5a5}
+.radio-player-panel.is-playing .radio-live-indicator{background:#e14e55;box-shadow:0 0 0 5px color-mix(in srgb,#e14e55 18%,transparent);animation:radioPulse 1.4s ease-in-out infinite}
+.radio-waveform{flex:0 1 36%;min-width:120px;height:24px;padding:0 4px;overflow:hidden}
+.radio-player-panel.is-playing .radio-waveform i{animation:radioWave .72s ease-in-out infinite alternate}
+.radio-player-panel.is-playing .radio-waveform i:nth-child(3n){animation-delay:-.45s}
+.radio-player-panel.is-playing .radio-waveform i:nth-child(4n){animation-delay:-.2s}
+.radio-player-panel.is-playing .radio-waveform i:nth-child(5n){animation-delay:-.58s}
+.radio-player-panel.is-reactive-waveform .radio-waveform i{animation:none!important;transition:height .08s linear}
+.radio-controls{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:4px;padding-top:4px;border-top:1px solid var(--line)}
+.radio-control-button,.radio-card-action{min-height:34px;padding:5px 12px;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:13px;background:var(--bg2);color:var(--ink);font:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease}
+.radio-control-button:hover:not(:disabled),.radio-card-action:hover{transform:translateY(-2px);border-color:var(--accent);background:var(--accent);color:var(--bg2)}
+.radio-control-button:disabled{opacity:.5;cursor:not-allowed}
+.radio-play-button{min-width:78px;background:var(--accent);color:var(--bg2)}
+.radio-volume-control{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}
+.radio-volume-control input{width:80px;accent-color:var(--accent)}
+.radio-player-status{flex:1 1 100%;min-height:0;color:var(--muted);font-size:11px;line-height:1.25}
+.radio-station-section{margin:0 0 24px}
+.radio-section-title{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 16px}
+.radio-section-title h2,.radio-official-player-heading h2{font-family:"Reem Kufi","Readex Pro",sans-serif;font-size:clamp(19px,3vw,25px)}
+.radio-section-title .daily-content-mark{color:var(--accent);font-size:25px}
+.radio-station-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;gap:16px}
+.radio-station-card{position:relative;display:flex;min-width:0;flex-direction:column;align-items:flex-start;overflow:hidden;padding:clamp(16px,2.4vw,24px);border:1px solid var(--line);border-radius:22px;background:var(--bg2);box-shadow:0 12px 30px rgba(20,30,20,.07);animation:radioCardIn .55s both;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.radio-station-grid .radio-station-card{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"tag icon" "title title" "action link";grid-template-rows:38px 1fr 34px;align-items:center;gap:5px 10px;min-height:195px;padding:14px}
+.radio-station-grid .radio-card-icon{grid-area:icon;width:38px;height:38px;margin:0;border-radius:13px;font-size:20px}
+.radio-station-grid .radio-card-tag{grid-area:tag;min-width:0;margin:0;font-size:10px}
+.radio-station-grid .radio-station-card h3{grid-area:title;min-height:0;margin:0;font-size:15px;line-height:1.45}
+.radio-station-grid .radio-card-action{grid-area:action;min-height:34px;margin:0;padding:5px 8px;font-size:11px}
+.radio-station-grid .radio-official-link{grid-area:link;max-width:100%;margin:0;font-size:10px}
+.radio-station-grid .radio-reciter-card{grid-template-areas:"tag icon" "title title" "select select" "action action";grid-template-rows:38px 1fr 34px 34px;min-height:195px}
+.radio-station-grid .radio-reciter-card h3{align-self:center}
+.radio-station-grid .radio-reciter-select{grid-area:select;width:100%;min-width:0;min-height:34px;margin:0;padding:4px 8px;font-size:11px}
+.radio-station-card::before{position:absolute;inset:0 0 auto;height:4px;background:hsl(var(--station-hue) 52% 47%);content:""}
+.radio-station-card:hover,.radio-station-card.is-selected{transform:translateY(-4px);border-color:color-mix(in srgb,hsl(var(--station-hue) 52% 47%) 55%,var(--line));box-shadow:0 18px 40px color-mix(in srgb,hsl(var(--station-hue) 52% 47%) 12%,transparent)}
+.radio-station-card:nth-child(2){animation-delay:.06s}
+.radio-station-card:nth-child(3){animation-delay:.12s}
+.radio-station-card:nth-child(4){animation-delay:.18s}
+.radio-card-icon{display:grid;place-items:center;width:54px;height:54px;margin-bottom:16px;border:1px solid color-mix(in srgb,hsl(var(--station-hue) 52% 47%) 30%,var(--line));border-radius:18px;background:color-mix(in srgb,hsl(var(--station-hue) 52% 47%) 10%,var(--bg));font-size:26px}
+.radio-card-tag{margin-bottom:7px;color:color-mix(in srgb,hsl(var(--station-hue) 52% 47%) 88%,var(--ink));font-size:11px;font-weight:600}
+.radio-station-card h3{min-height:2.8em;margin-bottom:8px;font-family:"Reem Kufi","Readex Pro",sans-serif;font-size:17px;line-height:1.55}
+.radio-station-card p{flex:1;margin-bottom:18px;color:var(--muted);font-size:12px;line-height:1.9}
+.radio-card-action{width:100%;margin-top:auto}
+.radio-official-link{display:block;margin:10px auto 0;color:var(--muted);font-size:11px;text-align:center;text-decoration:none}
+.radio-official-link:hover{color:var(--accent)}
+.radio-reciter-status{margin:0 0 14px;color:var(--muted);font-size:12px;text-align:center}
+.radio-reciter-select{width:100%;min-height:42px;margin:0 0 12px;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-size:13px}
+.radio-official-player[hidden]{display:none}
+.radio-official-player-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+.radio-official-player iframe{display:block;width:100%;height:min(68vh,620px);border:0;border-radius:16px;background:var(--bg)}
+@keyframes radioWave{from{transform:scaleY(.38);opacity:.55}to{transform:scaleY(1);opacity:1}}
+@keyframes radioPulse{50%{box-shadow:0 0 0 9px color-mix(in srgb,#e14e55 8%,transparent)}}
+@keyframes radioCardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:980px){.radio-station-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.radio-player-top{align-items:center;flex-direction:row;gap:8px}.radio-waveform{flex:0 0 40%;min-width:0;max-width:40%;height:24px;gap:3px}.radio-waveform i{width:3px}.radio-waveform i:nth-child(n+13){display:none}.radio-controls{gap:5px;margin-top:3px;padding-top:3px}.radio-controls .radio-control-button{flex:0 0 auto;min-width:58px;padding-inline:7px}.radio-volume-control{flex:1 1 120px;justify-content:space-between;min-width:110px;font-size:11px}.radio-volume-control input{flex:0 1 80px;width:80px;max-width:80px}.radio-player-status{flex-basis:100%}.radio-official-player-heading{align-items:flex-start;flex-direction:column}}
+@media(max-width:600px){.radio-feature-card{padding:3px 8px;border-radius:22px}.radio-heading{padding:2px 6px}.radio-heading h1{margin-bottom:2px}.radio-player-panel{padding:3px 6px 0}}
+@media(max-width:420px){.radio-station-grid{grid-template-columns:1fr}.radio-station-card{min-height:0}.radio-station-card h3{min-height:0}}
+@media(prefers-reduced-motion:reduce){.radio-station-card,.radio-waveform i,.radio-live-indicator{animation:none!important;transition:none!important}}

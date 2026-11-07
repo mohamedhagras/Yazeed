@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F3ECDF">
+<title>الإذاعة | يَزِيد</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Readex+Pro:wght@300;400;600&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="content-pages.css">
+<link rel="stylesheet" href="radio-page.css">
+</head>
+<body class="content-page-body radio-page">
+<nav class="motion-nav" aria-label="التنقل الرئيسي">
+  <div class="motion-links" id="primaryNavLinks">
+    <button class="theme" id="theme" type="button" aria-label="تبديل الوضع الداكن أو الفاتح" title="تبديل الوضع"></button>
+    <button class="nav-menu-toggle" id="navMenuToggle" type="button" aria-label="فتح قائمة التنقل" aria-expanded="false" aria-controls="primaryNavLinks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <a href="index.html#home"><span class="nav-label">الرئيسية</span></a>
+    <a href="reels.html"><span class="nav-label">ريل</span></a>
+    <a href="posts.html"><span class="nav-label">المنشورات</span></a>
+    <a href="hadith.html"><span class="nav-label">الأحاديث</span></a>
+    <a href="quran.html"><span class="nav-label">المصحف</span></a>
+    <a href="radio.html" class="active" aria-current="page"><span class="nav-label">الإذاعة</span></a>
+  </div>
+</nav>
+<main class="content-page-main">
+  <section class="radio-feature-card" aria-label="الإذاعة الإسلامية ومشغل البث">
+    <header class="content-page-heading radio-heading">
+      <span class="content-page-kicker">يَزِيد · استمع وتدبّر</span>
+      <h1>الإذاعة الإسلامية</h1>
+    </header>
+
+    <div class="radio-player-panel" aria-label="لوحة التحكم في الإذاعة">
+      <div class="radio-player-top">
+        <div>
+          <span class="radio-live-indicator" id="radioLiveIndicator" aria-hidden="true"></span>
+          <span class="radio-player-label">يُبث الآن</span>
+          <h2 id="radioNowPlaying">اختر إذاعة للاستماع</h2>
+        </div>
+        <div class="radio-waveform" id="radioWaveform" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+      <audio id="radioAudio" preload="none"></audio>
+      <div class="radio-controls">
+        <button class="radio-control-button radio-play-button" id="radioPlayPause" type="button" disabled aria-label="تشغيل">تشغيل</button>
+        <button class="radio-control-button" id="radioStop" type="button" disabled>إيقاف</button>
+        <button class="radio-control-button radio-floating-button" id="radioFloatingPlayer" type="button" disabled>فتح المشغل العائم</button>
+        <label class="radio-volume-control" for="radioVolume">مستوى الصوت
+          <input id="radioVolume" type="range" min="0" max="1" step="0.05" value="0.8">
+        </label>
+        <span class="radio-player-status" id="radioStatus" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="radio-station-section" aria-labelledby="radioStationsTitle">
+    <div class="radio-section-title">
+      <span class="daily-content-mark" aria-hidden="true">۞</span>
+      <h2 id="radioStationsTitle">اختر محطتك</h2>
+    </div>
+    <div class="radio-station-grid">
+      <article class="radio-station-card" style="--station-hue: 147">
+        <span class="radio-card-icon" aria-hidden="true">📖</span>
+        <span class="radio-card-tag">مصر</span>
+        <h3>إذاعة القرآن الكريم</h3>
+        <button class="radio-card-action" type="button" data-transcription-station="egypt" data-station-name="إذاعة القرآن الكريم - مصر" data-station-src="https://radio.xecod.com/station/quran-cairo">استمع الآن</button>
+      </article>
+      <article class="radio-station-card" style="--station-hue: 39">
+        <span class="radio-card-icon" aria-hidden="true">🕋</span>
+        <span class="radio-card-tag">مكة المكرمة</span>
+        <h3>إذاعة القرآن الكريم</h3>
+        <button class="radio-card-action" type="button" data-audio-reactive="true" data-transcription-station="makkah" data-station-name="إذاعة القرآن الكريم - مكة" data-station-src="https://edge.mixlr.com/channel/rwumx">استمع الآن</button>
+      </article>
+      <article class="radio-station-card radio-sunnah-card" style="--station-hue: 189">
+        <span class="radio-card-icon" aria-hidden="true">🕌</span>
+        <span class="radio-card-tag">المدينة المنورة · السعودية</span>
+        <h3>قناة السنة النبوية</h3>
+        <button class="radio-card-action" id="playSunnah" type="button" data-station-name="قناة السنة النبوية">فتح البث الرسمي</button>
+        <a class="radio-official-link" href="https://saudiatv.sba.sa/Channel-%D9%82%D9%86%D8%A7%D8%A9-%D8%A7%D9%84%D8%B3%D9%86%D8%A9-%D8%A7%D9%84%D9%86%D8%A8%D9%88%D9%8A%D8%A9-5" target="_blank" rel="noopener noreferrer">فتح موقع هيئة الإذاعة والتلفزيون ↗</a>
+      </article>
+      <article class="radio-station-card" style="--station-hue: 266">
+        <span class="radio-card-icon" aria-hidden="true">✨</span>
+        <span class="radio-card-tag">قصص إيمانية</span>
+        <h3>قصص الأنبياء</h3>
+        <button class="radio-card-action" type="button" data-transcription-station="stories" data-station-name="قصص الأنبياء" data-station-src="https://backup.qurango.net/radio/alanbiya">استمع الآن</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="radio-station-section" aria-labelledby="radioRecitersTitle">
+    <div class="radio-section-title">
+      <span class="daily-content-mark" aria-hidden="true">۞</span>
+      <h2 id="radioRecitersTitle">مصاحف القراء</h2>
+    </div>
+    <p class="radio-reciter-status" id="radioReciterStatus" role="status" aria-live="polite">جارٍ تحميل أسماء السور…</p>
+    <div class="radio-station-grid" id="radioReciterGrid"></div>
+    <a class="radio-official-link" href="https://mp3quran.net/" target="_blank" rel="noopener noreferrer">مصدر ملفات التلاوات: MP3 Quran ↗</a>
+  </section>
+  <div class="radio-official-player" id="sunnahPlayer" hidden>
+    <div class="radio-official-player-heading">
+      <h2>البث الرسمي لقناة السنة النبوية</h2>
+      <button class="radio-control-button" id="closeSunnahPlayer" type="button">إيقاف</button>
+    </div>
+    <iframe title="البث الرسمي لقناة السنة النبوية - هيئة الإذاعة والتلفزيون السعودية" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <footer class="content-page-footer">يَزِيد · لا خير في كثير متقطع، ولكن الخير في قليل مستمر</footer>
+</main>
+<script src="transcription-config.js"></script>
+<script src="radio-reciter-data.js"></script>
+<script src="radio.js"></script>
+<script src="scroll-navigation.js"></script>
+</body>
+</html>

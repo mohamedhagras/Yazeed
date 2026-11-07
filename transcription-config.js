@@ -1,0 +1,1 @@
+window.YAZEED_TRANSCRIPTION_API_URL = "";
