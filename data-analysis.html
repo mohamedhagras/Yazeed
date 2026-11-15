@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F3ECDF">
+<title>تحليل البيانات | تَزَوَّدُوا | Tazawwadu</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Readex+Pro:wght@300;400;600&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="content-pages.css">
+<link rel="stylesheet" href="data-analysis.css">
+</head>
+<body class="content-page-body data-analysis-page">
+<nav class="motion-nav" aria-label="التنقل الرئيسي">
+  <div class="motion-links" id="primaryNavLinks">
+    <button class="theme" id="theme" type="button" aria-label="تبديل الوضع الداكن أو الفاتح" title="تبديل الوضع"></button>
+    <button class="nav-menu-toggle" id="navMenuToggle" type="button" aria-label="فتح قائمة التنقل" aria-expanded="false" aria-controls="primaryNavLinks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <a href="index.html#home"><span class="nav-label">الرئيسية</span></a>
+    <a href="reels.html"><span class="nav-label">ريل</span></a>
+    <a href="posts.html"><span class="nav-label">المنشورات</span></a>
+    <a href="hadith.html"><span class="nav-label">الأحاديث</span></a>
+    <a href="quran.html"><span class="nav-label">المصحف</span></a>
+    <a href="data-analysis.html" class="active" aria-current="page"><span class="nav-label">تحليل البيانات</span></a>
+    <a href="radio.html"><span class="nav-label">الإذاعة</span></a>
+  </div>
+</nav>
+<main class="content-page-main data-analysis-main">
+  <header class="content-page-heading">
+    <span class="content-page-kicker">تَزَوَّدُوا | Tazawwadu · أدوات المكتبة</span>
+    <h1>تحليل بيانات الجداول</h1>
+    <p>اختر ملف Excel أو CSV، ثم حدّد الأعمدة التي تريد تحليلها وشاهد ملخصاتها ورسومها البيانية.</p>
+  </header>
+
+  <section class="analysis-panel" aria-labelledby="uploadTitle">
+    <div class="analysis-section-heading">
+      <span class="analysis-step">١</span>
+      <div><h2 id="uploadTitle">اختر ملفًا</h2><p>الملفات المدعومة: Excel (.xlsx) وCSV حتى ٢٠ ميجابايت، بحد أقصى ٥٠ ألف صف ومليون خلية. تُجهّز بيانات الورقة على دفعات مع فحص حدودها قبل إنشاء صفوف التحليل.</p></div>
+    </div>
+    <label class="analysis-file-picker" for="analysisFile">
+      <span aria-hidden="true">📊</span>
+      <strong>اختر ملف Excel أو CSV</strong>
+      <small id="fileName">لن يُحلّل الملف قبل اختيارك لطريقة التحليل والضغط على الزر.</small>
+      <input id="analysisFile" type="file" accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv">
+    </label>
+    <p id="fileStatus" class="analysis-status" role="status" aria-live="polite"></p>
+    <div class="analysis-workbook-options" id="workbookOptions" hidden>
+      <label class="analysis-field" for="sheetSelect"><span>ورقة العمل</span><select id="sheetSelect"></select></label>
+      <p class="analysis-file-meta" id="fileMeta"></p>
+    </div>
+  </section>
+
+  <section class="analysis-panel" id="columnPanel" aria-labelledby="columnsTitle" hidden>
+    <div class="analysis-section-heading">
+      <span class="analysis-step">٢</span>
+      <div><h2 id="columnsTitle">اختر رؤوس الأعمدة</h2><p>حدّد فقط البيانات التي تريد تحليلها. نوع العمود يُكتشف تلقائيًا.</p></div>
+    </div>
+    <div class="analysis-column-actions">
+      <span id="columnCount" aria-live="polite"></span>
+      <div><button type="button" class="analysis-text-button" id="selectAllColumns">تحديد الكل</button><button type="button" class="analysis-text-button" id="clearColumns">إلغاء التحديد</button></div>
+    </div>
+    <div class="analysis-column-list" id="columnList"></div>
+  </section>
+
+  <section class="analysis-panel" id="filtersPanel" aria-labelledby="filtersTitle" hidden>
+    <div class="analysis-section-heading">
+      <span class="analysis-step">٣</span>
+      <div><h2 id="filtersTitle">صفِّ البيانات</h2><p>أضف فلاتر للتاريخ أو الأرقام أو التصنيفات، ويمكنك جمع أكثر من فلتر. ترك القيم دون تحديد يعني عدم تصفية ذلك العمود.</p></div>
+    </div>
+    <div class="analysis-filter-builder">
+      <label class="analysis-field" for="filterColumn"><span>العمود المراد تصفيته</span><select id="filterColumn"></select></label>
+      <button type="button" class="analysis-secondary-button" id="addFilter">إضافة فلتر</button>
+      <button type="button" class="analysis-text-button analysis-clear-filters" id="clearFilters" disabled>مسح كل الفلاتر</button>
+    </div>
+    <div class="analysis-filter-list" id="filterList"></div>
+    <p class="analysis-filter-preview" id="filterPreview" aria-live="polite"></p>
+  </section>
+
+  <section class="analysis-panel" id="runPanel" aria-labelledby="runTitle" hidden>
+    <div class="analysis-section-heading">
+      <span class="analysis-step">٤</span>
+      <div><h2 id="runTitle">طريقة التحليل</h2><p>يمكنك تحليل الملف على جهازك أو عبر الخادم، ومقارنة زمن التنفيذ عند تهيئة الخادم.</p></div>
+    </div>
+    <div class="analysis-run-options">
+      <label class="analysis-field" for="processingMode"><span>طريقة المعالجة</span>
+        <select id="processingMode">
+          <option value="local">محليًا على هذا الجهاز — لا يُرسل الملف</option>
+          <option value="server" id="serverOption" disabled>على الخادم — غير متاح حاليًا</option>
+          <option value="compare" id="compareOption" disabled>مقارنة المحلي والخادم</option>
+        </select>
+      </label>
+      <p class="analysis-privacy-note" id="serverNotice">المعالجة المحلية لا ترسل الملف. لم يُضبط عنوان خادم التحليل؛ ستحتاج إلى نشر خادم المشروع وإعداد عنوانه لتفعيل التحليل عبر الخادم والمقارنة.</p>
+    </div>
+    <button type="button" class="analysis-primary-button" id="runAnalysis" disabled>حلّل الأعمدة المحددة</button>
+    <p class="analysis-status" id="analysisStatus" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="analysis-results" id="analysisResults" aria-labelledby="resultsTitle" hidden>
+    <div class="analysis-results-heading">
+      <div><span class="content-page-kicker">ملخص الملف</span><h2 id="resultsTitle">نتائج التحليل</h2></div>
+      <button type="button" class="analysis-text-button" id="resetAnalysis">تحليل ملف آخر</button>
+    </div>
+    <div class="analysis-kpis" id="analysisKpis"></div>
+    <div class="analysis-comparison" id="comparisonResults" hidden></div>
+    <section class="analysis-card analysis-column-dashboard" aria-labelledby="columnChartsTitle">
+      <div class="analysis-card-heading analysis-dashboard-heading">
+        <div><h3 id="columnChartsTitle">لوحة الرسوم التفاعلية</h3><p>خصّص الرسوم، وانقر على أي جزء لتصفية بقية اللوحة. التصدير يشمل الرسوم المحمّلة؛ صورة PNG حتى ٤٨ رسمًا.</p><span class="analysis-chart-count" id="columnChartCount"></span></div>
+        <div class="analysis-dashboard-actions">
+          <button type="button" class="analysis-secondary-button" id="saveDashboard" disabled>حفظ تصميم اللوحة</button>
+          <button type="button" class="analysis-secondary-button" id="exportDashboardImage" disabled>تنزيل الرسوم كصورة</button>
+          <button type="button" class="analysis-secondary-button" id="printDashboard" disabled>طباعة / PDF</button>
+          <button type="button" class="analysis-secondary-button analysis-add-chart" id="addDashboardChart">إضافة رسم جديد</button>
+        </div>
+      </div>
+      <div class="analysis-dashboard-filters" id="dashboardFilterBar" hidden>
+        <div class="analysis-dashboard-filter-chips" id="dashboardFilterChips"></div>
+        <button type="button" class="analysis-text-button" id="clearDashboardFilters">إلغاء فلاتر الرسوم</button>
+      </div>
+      <p class="analysis-dashboard-status" id="dashboardStatus" role="status" aria-live="polite"></p>
+      <div class="analysis-column-charts" id="columnCharts"></div>
+      <button type="button" class="analysis-secondary-button analysis-more-charts" id="showMoreCharts" hidden>عرض المزيد من الرسوم</button>
+      <p class="analysis-chart-empty" id="columnChartsEmpty" hidden></p>
+    </section>
+    <div class="analysis-dashboard-grid">
+      <section class="analysis-card analysis-chart-card" aria-labelledby="chartTitle">
+        <div class="analysis-card-heading">
+          <div><h3 id="chartTitle">رسم مقارنة مخصص</h3><p>اختر مقياسًا وتصنيفًا أو تاريخًا لمقارنة النتائج.</p></div>
+        </div>
+        <div class="analysis-chart-controls">
+          <label class="analysis-field" for="chartMetric"><span>المقياس الرقمي</span><select id="chartMetric"></select></label>
+          <label class="analysis-field" for="chartDimension"><span>التجميع حسب</span><select id="chartDimension"></select></label>
+          <label class="analysis-field" for="chartAggregation"><span>طريقة الحساب</span><select id="chartAggregation"><option value="sum">المجموع</option><option value="average">المتوسط</option><option value="count">عدد السجلات</option></select></label>
+          <label class="analysis-field" for="chartType"><span>نوع الرسم</span><select id="chartType"><option value="auto">تلقائي</option><option value="bar">أعمدة</option><option value="line">خطي</option><option value="doughnut">دائري</option></select></label>
+        </div>
+        <div class="analysis-chart-wrap"><canvas id="analysisChart" role="img" aria-label="رسم بياني لملخص العمود المحدد"></canvas></div>
+        <p class="analysis-chart-empty" id="chartEmpty" hidden>لا توجد قيم كافية للرسم لهذا العمود.</p>
+      </section>
+    </div>
+    <section class="analysis-card analysis-table-card" aria-labelledby="summaryTitle">
+      <div class="analysis-card-heading"><div><h3 id="summaryTitle">ملخص الأعمدة المحددة</h3><p>ملخص يتغير مع الفلاتر الحالية.</p></div></div>
+      <div class="analysis-table-wrap"><table><thead><tr><th>العمود</th><th>النوع</th><th>القيم</th><th>الفارغ</th><th>المميز</th><th>الملخص</th></tr></thead><tbody id="summaryTable"></tbody></table></div>
+    </section>
+    <p class="analysis-retention-note">لا تحفظ الأداة الملف أو نتائج التحليل. يُحفظ تصميم اللوحة اختياريًا في مساحة التخزين المحلية لهذا المتصفح فقط. عند اختيار التحليل عبر الخادم، يُرسل الملف إلى خادم الموقع للمعالجة المؤقتة فقط.</p>
+  </section>
+  <footer class="content-page-footer">تَزَوَّدُوا | Tazawwadu · لا خير في كثير متقطع، ولكن الخير في قليل مستمر</footer>
+</main>
+<script src="transcription-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="data-analysis.js"></script>
+<script src="scroll-navigation.js"></script>
+</body>
+</html>

@@ -179,7 +179,7 @@
   function setEvent(i,skipTick){
     cur=i; var ev=EVENTS[i];
     $("title").textContent=ev.title; $("sub").textContent=ev.sub; $("hdate").textContent=ev.hj;
-    document.title="يَزِيد";
+    document.title="تَزَوَّدُوا | Tazawwadu";
     try{$("gdate").textContent=ev.t.toLocaleDateString("ar-EG",{day:"numeric",month:"long",year:"numeric",timeZone:TZ});}catch(e){}
     if(hfmt){T=parts(hfmt,ev.t); prevLen=parts(hfmt,new Date(ev.t.getTime()-T.day*86400000)).day; todT=sod(ev.t);}
     Array.prototype.forEach.call($("tabs").children,function(b,k){b.className=(k===i)?"on":"";});
@@ -582,7 +582,7 @@
       x.fillStyle=color;x.fillText(text,position,y,W-120);
     }
     function tx(text,y,size,color,weight,family){txAt(text,W/2,y,size,color,weight,family);}
-    tx("يَزِيد",145,42,acc,700,"'Reem Kufi'");
+    tx("تَزَوَّدُوا | Tazawwadu",145,42,acc,700,"'Reem Kufi'");
     tx("رفيقك اليومي للعبادة",192,24,muted,400);
     tx($("title").textContent,365,78,ink,700,"'Reem Kufi'");
     tx(ev.sub,425,31,muted,400);
@@ -619,7 +619,7 @@
     var verseLines=wrapCanvasText(x,verse[0],800),verseY=1385,lineHeight=Math.round(verseFont*1.5);
     verseLines.forEach(function(line){x.fillText(line,W/2,verseY);verseY+=lineHeight;});
     tx(verse[1],Math.min(1650,verseY+42),23,muted,400);
-    tx("يَزِيد",1770,24,muted,500,"'Reem Kufi'");
+    tx("تَزَوَّدُوا | Tazawwadu",1770,24,muted,500,"'Reem Kufi'");
     return c;
   }
   function makeSquareImage(){
@@ -638,7 +638,7 @@
       x.font=(weight||400)+" "+size+"px "+(family||"'Readex Pro'")+", Tahoma, sans-serif";
       x.fillStyle=color;x.fillText(text,position,y,maxWidth||430);
     }
-    tx("يَزِيد",78,40,acc,700,"'Reem Kufi'");
+    tx("تَزَوَّدُوا | Tazawwadu",78,40,acc,700,"'Reem Kufi'");
     tx("رفيقك اليومي للعبادة",112,21,muted,400);
     tx($("title").textContent,184,60,ink,700,"'Reem Kufi'");
     tx(ev.sub,220,21,muted,400);
@@ -674,7 +674,7 @@
     var verseLines=wrapCanvasText(x,verse[0],800),verseY=758,lineHeight=Math.round(verseFont*1.35);
     verseLines.forEach(function(line){x.fillText(line,W/2,verseY);verseY+=lineHeight;});
     tx(verse[1],Math.min(910,verseY+24),18,muted,400);
-    tx("يَزِيد",1000,20,muted,500,"'Reem Kufi'");
+    tx("تَزَوَّدُوا | Tazawwadu",1000,20,muted,500,"'Reem Kufi'");
     return c;
   }
   function wrapCanvasText(ctx,text,maxWidth){
@@ -781,7 +781,7 @@
         y+=rowHeight+18;
       }
     }else prepared.forEach(function(section){drawSection(section,pad,inner,y);y+=section.height+24;});
-    ctx.fillStyle=palette.muted;ctx.font="600 "+(square?19:24)+"px 'Reem Kufi', Tahoma, sans-serif";ctx.fillText("يَزِيد",W/2,H-42);
+    ctx.fillStyle=palette.muted;ctx.font="600 "+(square?19:24)+"px 'Reem Kufi', Tahoma, sans-serif";ctx.fillText("تَزَوَّدُوا | Tazawwadu",W/2,H-42);
     return canvas;
   }
   function downloadCanvas(canvas,filename){
@@ -792,7 +792,7 @@
       showFloatingToast("الصورة جاهزة","بدأ تنزيل ملف الصورة بصيغة PNG.");
     },"image/png");
   }
-  var currentShareFilename="yazeed-ramadan-countdown-story.png",currentShareTitle="يَزِيد";
+  var currentShareFilename="tazawwadu-ramadan-countdown-story.png",currentShareTitle="تَزَوَّدُوا | Tazawwadu";
   function showImagePreview(canvas,filename,title){
     currentShareCanvas=canvas;currentShareFilename=filename;currentShareTitle=title;
     $("img").src=canvas.toDataURL("image/png");$("img").alt="معاينة صورة "+title;$("img").dataset.ready="1";$("ov").className="ov on";
@@ -805,14 +805,14 @@
       try{
         var suffix=shareSize.value==="square"?"square":"story";
         if(action.kind==="share"){
-          showImagePreview(makeImage(),"yazeed-ramadan-countdown-"+suffix+".png",$("title").textContent);
+          showImagePreview(makeImage(),"tazawwadu-ramadan-countdown-"+suffix+".png",$("title").textContent);
           return;
         }
         var image=makeSectionImage(action.kind),filename,title;
-        if(action.kind==="daily"){filename="yazeed-daily-content-"+suffix+".png";title="زادك اليومي";}
-        else if(action.kind==="quran"){filename="yazeed-quran-page-"+suffix+".png";title="ورد القرآن اليومي";}
-        else{filename="yazeed-"+action.kind.slice("daily-card:".length)+"-"+suffix+".png";title=captureSections(action.kind)[0].heading;}
-        showImagePreview(image,filename,title||"يَزِيد");
+        if(action.kind==="daily"){filename="tazawwadu-daily-content-"+suffix+".png";title="زادك اليومي";}
+        else if(action.kind==="quran"){filename="tazawwadu-quran-page-"+suffix+".png";title="ورد القرآن اليومي";}
+        else{filename="tazawwadu-"+action.kind.slice("daily-card:".length)+"-"+suffix+".png";title=captureSections(action.kind)[0].heading;}
+        showImagePreview(image,filename,title||"تَزَوَّدُوا | Tazawwadu");
       }catch(error){showFloatingToast("تعذّر إنشاء الصورة",error.message||"حدث خطأ أثناء إنشاء الصورة.");}
     });
   }
@@ -848,7 +848,7 @@
       if(!blob){showFloatingToast("تعذّرت المشاركة","لم يتمكن المتصفح من تجهيز الصورة.");return;}
       var file=new File([blob],currentShareFilename,{type:"image/png"});
       if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-        navigator.share({files:[file],title:currentShareTitle,text:currentShareTitle+" — من موقع يَزِيد"}).catch(function(error){if(error.name!=="AbortError")showFloatingToast("لم تتم المشاركة","تعذّرت مشاركة الصورة.");});
+        navigator.share({files:[file],title:currentShareTitle,text:currentShareTitle+" — من موقع تَزَوَّدُوا | Tazawwadu"}).catch(function(error){if(error.name!=="AbortError")showFloatingToast("لم تتم المشاركة","تعذّرت مشاركة الصورة.");});
       }else downloadCanvas(currentShareCanvas,currentShareFilename);
     },"image/png");
   };

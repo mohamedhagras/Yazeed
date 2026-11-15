@@ -6,7 +6,75 @@
     hadith:{empty:"لا توجد أحاديث مضافة بعد."}
   }[pageType];
   var list=document.getElementById("contentList");
-  if(!pageConfig||!list)return;
+  var searchInput=document.getElementById("contentSearch");
+  var categorySelect=document.getElementById("contentCategory");
+  var favoritesButton=document.getElementById("showFavorites");
+  var libraryStatus=document.getElementById("contentLibraryStatus");
+  if(!pageConfig||!list||!searchInput||!categorySelect||!favoritesButton||!libraryStatus)return;
+  var cards=[],favorites=new Set(),showFavoritesOnly=false,storageWarning="";
+  var favoritesStorageKey="wa-tazawwadu-favorites-v1";
+
+  function setLibraryStatus(message,isError){
+    libraryStatus.textContent=message||"";
+    libraryStatus.classList.toggle("is-error",Boolean(isError));
+  }
+  function readFavorites(){
+    try{
+      var saved=JSON.parse(localStorage.getItem(favoritesStorageKey)||"[]");
+      if(Array.isArray(saved))saved.forEach(function(value){if(typeof value==="string")favorites.add(value);});
+    }catch(error){
+      storageWarning="تعذّر تحميل المفضّلة المحفوظة؛ يمكنك استخدام المفضّلة خلال هذه الزيارة.";
+      setLibraryStatus(storageWarning,true);
+    }
+  }
+  function itemKey(item,index){
+    var identity=item.id||item.url||item.media_url||item.image||[item.title,item.text||item.body,item.source].join("|");
+    return pageType+":"+String(identity||index);
+  }
+  function applyFilters(){
+    var query=searchInput.value.trim().toLocaleLowerCase();
+    var category=categorySelect.value;
+    var visibleCount=0;
+    cards.forEach(function(entry){
+      var matchesQuery=!query||entry.searchText.indexOf(query)!==-1;
+      var matchesCategory=category==="all"||entry.category===category;
+      var matchesFavorite=!showFavoritesOnly||favorites.has(entry.key);
+      var visible=matchesQuery&&matchesCategory&&matchesFavorite;
+      entry.card.hidden=!visible;
+      if(visible)visibleCount++;
+    });
+    var noMatches=document.getElementById("contentNoMatches");
+    if(noMatches)noMatches.hidden=!cards.length||visibleCount>0;
+    favoritesButton.setAttribute("aria-pressed",String(showFavoritesOnly));
+    favoritesButton.classList.toggle("is-active",showFavoritesOnly);
+    favoritesButton.textContent=showFavoritesOnly?"عرض الكل":"المفضّلة";
+    if(storageWarning){
+      setLibraryStatus(storageWarning,true);
+    }else if(cards.length){
+      setLibraryStatus("عرض "+visibleCount+" من "+cards.length+" عنصر.");
+    }else if(!libraryStatus.classList.contains("is-error")){
+      setLibraryStatus("");
+    }
+  }
+  function toggleFavorite(entry,button){
+    if(favorites.has(entry.key))favorites.delete(entry.key);
+    else favorites.add(entry.key);
+    button.setAttribute("aria-pressed",String(favorites.has(entry.key)));
+    button.textContent=favorites.has(entry.key)?"إزالة من المفضّلة":"إضافة للمفضّلة";
+    try{
+      localStorage.setItem(favoritesStorageKey,JSON.stringify(Array.from(favorites)));
+      storageWarning="";
+      setLibraryStatus("تم تحديث المفضّلة.");
+    }catch(error){
+      storageWarning="تعذّر حفظ المفضّلة على هذا الجهاز؛ سيبقى اختيارك متاحًا حتى إغلاق الصفحة.";
+      setLibraryStatus(storageWarning,true);
+    }
+    applyFilters();
+  }
+  readFavorites();
+  searchInput.addEventListener("input",applyFilters);
+  categorySelect.addEventListener("change",applyFilters);
+  favoritesButton.addEventListener("click",function(){showFavoritesOnly=!showFavoritesOnly;applyFilters();});
 
   if(pageType==="reels"){
     list.addEventListener("play",function(event){
@@ -122,12 +190,43 @@
       media.appendChild(frame);
     }else if(safe&&/\.(mp4|webm|ogg|mov)(?:$|[?#])/i.test(videoUrl)){
       var video=document.createElement("video");
-      video.src=safe;
       video.controls=true;
       video.playsInline=true;
-      video.preload="metadata";
+      video.preload="none";
       video.setAttribute("aria-label",item.title||"فيديو ريل");
+      video.hidden=true;
       media.appendChild(video);
+      var loadButton=document.createElement("button");
+      loadButton.type="button";
+      loadButton.className="reel-load-button";
+      loadButton.textContent="تحميل الفيديو وتشغيله";
+      loadButton.setAttribute("aria-label","تحميل وتشغيل "+(item.title||"الفيديو"));
+      var videoStatus=document.createElement("span");
+      videoStatus.className="reel-load-status";
+      videoStatus.setAttribute("role","status");
+      videoStatus.setAttribute("aria-live","polite");
+      loadButton.addEventListener("click",function(){
+        if(!video.src){
+          video.src=safe;
+          video.load();
+          video.hidden=false;
+          loadButton.hidden=true;
+        }else if(video.error){
+          video.load();
+          loadButton.hidden=true;
+        }
+        video.play().then(function(){
+          videoStatus.textContent="";
+        }).catch(function(){
+          videoStatus.textContent="تعذّر تشغيل الفيديو. جرّب زر التشغيل داخل المشغّل.";
+        });
+      });
+      video.addEventListener("error",function(){
+        videoStatus.textContent="تعذّر تحميل الفيديو. تحقق من اتصالك ثم أعد المحاولة.";
+        loadButton.textContent="إعادة تحميل الفيديو";
+        loadButton.hidden=false;
+      });
+      media.append(loadButton,videoStatus);
     }else{
       media.classList.add("reel-link-placeholder");
       addText(media,"span","reel-play-icon","▶");
@@ -167,17 +266,42 @@
   function render(){
     list.replaceChildren();
     var items=window.YAZEED_CONTENT&&Array.isArray(window.YAZEED_CONTENT[pageType])?window.YAZEED_CONTENT[pageType]:[];
-    if(!items.length){addText(list,"p","content-empty",pageConfig.empty);return;}
-    items.forEach(function(item){
+    if(!items.length){addText(list,"p","content-empty",pageConfig.empty);applyFilters();return;}
+    var categories=Array.from(new Set(items.map(function(item){return item&&typeof item.category==="string"?item.category.trim():"";}).filter(Boolean))).sort(function(a,b){return a.localeCompare(b,"ar");});
+    if(items.some(function(item){return item&&typeof item==="object"&&!String(item.category||"").trim();}))categories.push("غير مصنّف");
+    categories.forEach(function(category){
+      var option=document.createElement("option");
+      option.value=category;
+      option.textContent=category;
+      categorySelect.appendChild(option);
+    });
+    items.forEach(function(item,index){
       if(!item||typeof item!=="object")return;
       var card=document.createElement("article");
       card.className="content-card";
       if(pageType==="reels")renderReel(item,card);
       else if(pageType==="posts")renderPost(item,card);
       else renderHadith(item,card);
+      var key=itemKey(item,index);
+      var favoriteButton=document.createElement("button");
+      favoriteButton.type="button";
+      favoriteButton.className="content-favorite-button";
+      favoriteButton.setAttribute("aria-pressed",String(favorites.has(key)));
+      favoriteButton.textContent=favorites.has(key)?"إزالة من المفضّلة":"إضافة للمفضّلة";
+      favoriteButton.addEventListener("click",function(){toggleFavorite(entry,favoriteButton);});
+      card.appendChild(favoriteButton);
+      var category=item.category||"غير مصنّف";
+      if(item.category)addText(card,"span","content-category",category);
       list.appendChild(card);
+      var searchText=[item.title,item.text,item.body,item.description,item.explanation,item.source,category].filter(Boolean).join(" ").toLocaleLowerCase();
+      var entry={card:card,key:key,category:category,searchText:searchText};
+      cards.push(entry);
     });
-    if(!list.children.length)addText(list,"p","content-empty",pageConfig.empty);
+    var noMatches=addText(list,"p","content-empty","لا توجد نتائج مطابقة. غيّر كلمات البحث أو أزل الفلاتر.");
+    noMatches.id="contentNoMatches";
+    noMatches.hidden=true;
+    if(!cards.length)addText(list,"p","content-empty",pageConfig.empty);
+    applyFilters();
   }
   render();
 })();
